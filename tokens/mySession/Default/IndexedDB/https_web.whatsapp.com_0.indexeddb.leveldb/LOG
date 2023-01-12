@@ -1,0 +1,11 @@
+2023/01/11-18:53:53.494 3f44 Reusing MANIFEST C:\Users\lucas\OneDrive\Área de Trabalho\ProBot\tokens\mySession\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/01/11-18:53:53.496 3f44 Recovering log #43
+2023/01/11-18:53:53.810 3f44 Reusing old log C:\Users\lucas\OneDrive\Área de Trabalho\ProBot\tokens\mySession\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000043.log 
+2023/01/11-18:54:12.471 3f44 Level-0 table #49: started
+2023/01/11-18:54:13.168 3f44 Level-0 table #49: 1302331 bytes OK
+2023/01/11-18:54:13.244 3f44 Delete type=0 #43
+2023/01/11-18:54:17.480 a70 Compacting 1@1 + 2@2 files
+2023/01/11-18:54:18.498 a70 Generated table #50@1: 30682 keys, 2245903 bytes
+2023/01/11-18:54:18.857 a70 Generated table #51@1: 32923 keys, 1159098 bytes
+2023/01/11-18:54:18.858 a70 Compacted 1@1 + 2@2 files => 3405001 bytes
+2023/01/11-18:54:18.862 a70 compacted to: files[ 0 0 2 0 0 0 0 ]
