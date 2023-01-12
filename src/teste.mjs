@@ -1,9 +1,7 @@
 import fetch from 'cross-fetch';
 import moment from 'moment';
 
-//console.log(moment().format("MM"));
-
-fetch('http://localhost:3000/api/getAll')
+fetch('191.252.192.168:3000/api/getAll')
 .then((response) => response.json())
 .then((response) => {
 
