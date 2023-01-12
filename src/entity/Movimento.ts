@@ -9,13 +9,13 @@ export class Movimento extends BaseEntity {
   descricao: string;
 
   @Column()
-  tipo: number;
+  tipo: string;
 
   @Column("decimal", { precision: 20, scale: 2 })
   valor: number;
 
   @Column()
-  status: number;
+  status: string;
 
   @Column({ type: 'timestamp', nullable: true })
   data: Date;
