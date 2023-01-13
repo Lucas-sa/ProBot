@@ -29,6 +29,61 @@ export const getTodas = async (req: Request, res: Response) => {
   }
 };
 
+export const getResumo = async (req: Request, res: Response) => {
+  try {
+    const { mes } = req.params;
+
+    const entradas = await Movimento
+    .createQueryBuilder("movimento")
+    .select("SUM(movimento.valor)", "total")
+    .where("movimento.tipo = :tipo", { tipo: "entrada" })
+    .andWhere("MONTH(movimento.data) = :data", { data: mes })
+    .getRawOne()
+
+    const despesas = await Movimento
+    .createQueryBuilder("movimento")
+    .select("SUM(movimento.valor)", "total")
+    .where("movimento.tipo = :tipo", { tipo: "despesa" })
+    .andWhere("MONTH(movimento.data) = :data", { data: mes })
+    .getRawOne()
+
+    const despesasPagas = await Movimento
+    .createQueryBuilder("movimento")
+    .select("SUM(movimento.valor)", "total")
+    .where("movimento.tipo = :tipo", { tipo: "despesa" })
+    .andWhere("movimento.status = :status", { status: "paga" })
+    .andWhere("MONTH(movimento.data) = :data", { data: mes })
+    .getRawOne()
+
+    const despesasAbertas = await Movimento
+    .createQueryBuilder("movimento")
+    .select("SUM(movimento.valor)", "total")
+    .where("movimento.tipo = :tipo", { tipo: "despesa" })
+    .andWhere("movimento.status = :status", { status: "aberto" })
+    .andWhere("MONTH(movimento.data) = :data", { data: mes })
+    .getRawOne()
+
+    const data = []
+    const saldo = entradas.total - despesas.total
+    const iten = {
+      "entradas": Intl.NumberFormat('pt-br', {minimumFractionDigits: 2}).format(entradas.total),
+      "despesas": Intl.NumberFormat('pt-br', {minimumFractionDigits: 2}).format(despesas.total),
+      "saldo": Intl.NumberFormat('pt-br', {minimumFractionDigits: 2}).format(saldo),
+      "despesasPagas": Intl.NumberFormat('pt-br', {minimumFractionDigits: 2}).format(despesasPagas.total),
+      "despesasAbertas": Intl.NumberFormat('pt-br', {minimumFractionDigits: 2}).format(despesasAbertas.total)
+    }
+
+    data.push(iten)
+
+    return res.json(data);
+
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
+};
+
 export const getEntradas = async (req: Request, res: Response) => {
   try {
     const { mes } = req.params;
