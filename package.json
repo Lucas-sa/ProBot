@@ -1,14 +1,12 @@
 {
-  "name": "typeorm-restapi-crud",
+  "name": "pro-bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn src/index.ts",
-    "build": "tsc",
-    "start-api": "ts-node src/index.ts",
-    "start-whats": "node src/whast.mjs",
-    "start": "concurrently --kill-others \"ts-node src/index.ts\" \"node src/whast.mjs\""
+    "api": "ts-node api/init.ts",
+    "whats": "node whats/init.mjs",
+    "start": "concurrently --kill-others \"ts-node api/init.ts\" \"node whats/init.mjs\""
   },
   "keywords": [],
   "author": "",

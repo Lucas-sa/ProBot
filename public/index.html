@@ -87,11 +87,18 @@
                             <th> Ação </th>
                           </tr>
                         </thead>
-                        <tbody v-for="movimento in registros" :key="registros.id">
+                        <tbody v-for="ent in entradas" :key="entradas.id">
                           <tr>
-                            <td> {{movimento.descricao}} </td>
-                            <td> {{movimento.valor}} </td>
-                            <td> WD-12348 </td>
+                            <td> {{ent.descricao}} </td>
+                            <td> {{ent.valor}} </td>
+                            <td> 
+                              <button type="button" class="btn btn-gradient-info btn-fw">
+                                <i class="mdi mdi-border-color"></i>
+                              </button>
+                              <button type="button" class="btn btn-sm btn-gradient-danger btn-fw">
+                                <i class="mdi mdi-delete-forever"></i>
+                              </button> 
+                            </td>
                           </tr>
                         </tbody>
                       </table>
@@ -113,7 +120,7 @@
                             <th> Progress </th>
                           </tr>
                         </thead>
-                        <tbody v-for="movimento in registros" :key="registros.id">
+                        <tbody v-for="movimento in entradas" :key="entradas.id">
                           <tr>
                             <td> {{movimento.id}} </td>
                             <td> {{movimento.descricao}} </td>
@@ -147,7 +154,7 @@
                             <th> Progress </th>
                           </tr>
                         </thead>
-                        <tbody v-for="movimento in registros" :key="registros.id">
+                        <tbody v-for="movimento in entradas" :key="entradas.id">
                           <tr>
                             <td> {{movimento.id}} </td>
                             <td> {{movimento.descricao}} </td>
@@ -180,7 +187,7 @@
                             <th> Ação </th>
                           </tr>
                         </thead>
-                        <tbody v-for="movimento in registros" :key="registros.id">
+                        <tbody v-for="movimento in entradas" :key="entradas.id">
                           <tr>
                             <td> {{movimento.descricao}} </td>
                             <td> {{movimento.valor}} </td>
@@ -231,25 +238,27 @@
     <!-- End custom js for this page -->
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 
     <script>
+      moment.locale('pt-br');
       const { createApp, ref } = Vue
-      const registros = ref('')
+      const entradas = ref('')
 
-      function listar() {
-        fetch('http://localhost:3000/api/getAll')
+      function getEntradas(){
+        fetch('http://191.252.192.168:3000/api/getEntradas/'+moment().format("MM"))
         .then((response) => response.json())
         .then((response) => {
           console.log(response)
-          registros.value = response
+          entradas.value = response
         });
-      }listar()
+      }getEntradas()
 
       createApp({
         data() {
           return {
             message: 'Hello Vue!',
-            registros
+            entradas
           }
         }
       }).mount('#app')

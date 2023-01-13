@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
 import { Movimento } from "./entity/Movimento";
+import { Acao } from "./entity/Acao";
 import { DBHOST, DBNAME, DBPASS, DBUSER } from "./config";
 
 export const AppDataSource = new DataSource({
@@ -11,5 +12,5 @@ export const AppDataSource = new DataSource({
     database: DBNAME,
   synchronize: true,
   // logging: true,
-  entities: [Movimento],
+  entities: [Movimento, Acao],
 });

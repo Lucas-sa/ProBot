@@ -8,7 +8,7 @@ wppconnect
   .create({
     session: 'mySession',
     puppeteerOptions: {
-      userDataDir: './tokens/mySession', // or your custom directory
+      userDataDir: './whats/tokens/mySession', // or your custom directory
     },
   })
   .then((client) => start(client))
@@ -16,26 +16,28 @@ wppconnect
 
 function start(client) {
   client.onMessage((message) => {
-    if (message.body === 'Hello') {
+    let msgCliente = message.body.toLowerCase();
+    
+    if (msgCliente === 'menu') {
         // With buttons
-        client.sendText(message.from, 'WPPConnect message with buttons', {
+        client.sendText(message.from, 'MENU:', {
           useTemplateButtons: true, // False for legacy
           buttons: [
             {
-              url: 'https://wppconnect.io/',
-              text: 'WPPConnect Site'
+              id: '1',
+              text: 'Resumo financeiro'
             },
             {
-              phoneNumber: '+55 11 22334455',
-              text: 'Call me'
+              id: '2',
+              text: 'Financeiro detalhado'
             },
             {
-              id: 'your custom id 1',
-              text: 'Some text'
+              id: '3',
+              text: 'add Entrada'
             },
             {
-              id: 'another id 2',
-              text: 'Another text'
+              id: '4',
+              text: 'add Despesa'
             }
           ],
         })
@@ -46,19 +48,15 @@ function start(client) {
           console.error('Error when sending: ', erro); //return object error
         });
     }
-    if(message.body === 'getAll'){
-      fetch('http://localhost:3000/api/getData/'+moment().format("MM"))
+
+    if(msgCliente === 'financeiro detalhado'){
+      fetch('http://191.252.192.168:3000/api/getEntradas/'+moment().format('MM'))
       .then((response) => response.json())
       .then((response) => {
 
         let msg = "";
 
         response.map((result, i ) => {
-
-          const situacao = (result.status === 0 ) ? "Em aberto" : "Pago"
-
-          const valor = Intl.NumberFormat('pt-br', {style: 'currency', currency: 'BRL'}).format(result.valor)
-          const data = moment(result.data).format('L');
 
           msg += `
           Id: ${result.id} \n
@@ -67,7 +65,7 @@ function start(client) {
           Data: ${data} \n
           Status: ${situacao}  
           `
-
+          
           if(response.length !== ++i ){
             msg += "\n\n";
           }
@@ -85,5 +83,41 @@ function start(client) {
 
       });
     }
+
+    if(msgCliente === 'financeiro detalhado'){
+      fetch('http://191.252.192.168:3000/api/getDespesas/'+moment().format('MM'))
+      .then((response) => response.json())
+      .then((response) => {
+
+        let msg = "";
+        
+        response.map((result, i ) => {
+
+          msg += ` 
+          Id: ${result.id} \n
+          Descrição: ${result.descricao} \n
+          Valor: ${valor} \n
+          Data: ${data} \n
+          Status: ${situacao}  
+          `
+          
+          if(response.length !== ++i ){
+            msg += "\n\n";
+          }
+
+        })
+
+        client
+        .sendText(message.from, msg)
+        .then((result) => {
+          console.log('Result: ', result); //return object success
+        })
+        .catch((erro) => {
+          console.error('Error when sending: ', erro); //return object error
+        });
+
+      });
+    }
+
   });
 }
