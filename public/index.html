@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="app" class="font-mono">
+
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-10 p-10 text-white font-semibold">
+            <div class="bg-gradient-to-r from-emerald-500 to-emerald-800 shadow-lg shadow-emerald-700/50 hover:-translate-y-2 duration-500 cursor-pointer h-40 rounded-lg p-5 px-6">
+                Entradas
+            </div>
+            <div class="bg-gradient-to-r from-rose-500 to-rose-900 shadow-lg shadow-rose-700/50 hover:-translate-y-2 duration-500 cursor-pointer h-40 rounded-lg p-5 px-6">
+                Despesas
+            </div>
+            <div class="bg-gradient-to-r from-gray-600 to-gray-900 shadow-lg shadow-gray-800/50 hover:-translate-y-2 duration-500 cursor-pointer h-40 rounded-lg p-5 px-6">
+                <div>Despesas Em Aberto</div> 
+                <div class="font-bold text-3xl my-2">R$ {{ totalEntradas }}</div>
+            </div>
+            <div class="bg-gradient-to-r from-teal-500 to-teal-800 shadow-lg shadow-teal-600/50 hover:-translate-y-2 duration-500 cursor-pointer h-40 rounded-lg p-5 px-6">
+                Despesas Pagss
+            </div>
+            <div class="bg-gradient-to-r from-sky-500 to-sky-800 shadow-lg shadow-sky-700/50 hover:-translate-y-2 duration-500 cursor-pointer h-40 rounded-lg p-5 px-6">
+                Saldo
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>
