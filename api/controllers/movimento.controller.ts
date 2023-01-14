@@ -66,11 +66,11 @@ export const getResumo = async (req: Request, res: Response) => {
     const data = []
     const saldo = entradas.total - despesas.total
     const iten = {
-      "entradas": Intl.NumberFormat('pt-br', {minimumFractionDigits: 2}).format(entradas.total),
-      "despesas": Intl.NumberFormat('pt-br', {minimumFractionDigits: 2}).format(despesas.total),
-      "saldo": Intl.NumberFormat('pt-br', {minimumFractionDigits: 2}).format(saldo),
-      "despesasPagas": Intl.NumberFormat('pt-br', {minimumFractionDigits: 2}).format(despesasPagas.total),
-      "despesasAbertas": Intl.NumberFormat('pt-br', {minimumFractionDigits: 2}).format(despesasAbertas.total)
+      "entradas": entradas.total,
+      "despesas": despesas.total,
+      "saldo": saldo,
+      "despesasPagas": despesasPagas.total,
+      "despesasAbertas": despesasAbertas.total
     }
 
     data.push(iten)

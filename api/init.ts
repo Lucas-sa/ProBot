@@ -6,7 +6,7 @@ async function main() {
   try {
     await AppDataSource.initialize();
     app.listen(PORT);
-    console.log("Server on port", PORT);
+    console.log("Server iniciado -> http://191.252.192.168:3000", PORT);
 
   } catch (error) {
     console.error(error);
