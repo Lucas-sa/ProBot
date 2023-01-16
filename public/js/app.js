@@ -15,7 +15,6 @@ function getResumo() {
   fetch('http://191.252.192.168:3000/api/getResumo/' + moment().format("MM"))
   .then((response) => response.json())
   .then((response) => {
-      console.log(response)
       totalEntradas.value = response[0].entradas
       totalDespesas.value = response[0].despesas
       despesasPagas.value = response[0].despesasPagas
@@ -34,6 +33,7 @@ function getEntradas() {
   .then((response) => response.json())
   .then((response) => {
       entradas.value = response
+      console.log(response)
   });
 }getEntradas()
 
@@ -133,69 +133,69 @@ function getReqCharts() {
     };
     
     optionPie.value = {
-        color: ["#06b337", "#e5323e", "#006699"],
-        textStyle: {
-          fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif',
-        },
-        title: {
-          show: false,
-          text: 'Grafico',
-          left: 'center',
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)',
-        },
-        legend: {
-          orient: 'vertical',
-          left: 'left',
+      color: ["#06b337", "#e5323e", "#0071aa"],
+      textStyle: {
+        fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif',
+      },
+      title: {
+        show: false,
+        text: 'Grafico',
+        left: 'center',
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c} ({d}%)',
+      },
+      legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: [
+          'Entradas',
+          'Despesas',
+          'Saldo',
+        ],
+      },
+      series: [
+        {
+          name: 'Grafico Financeiro',
+          type: 'pie',
+          radius: '55%',
+          center: ['50%', '60%'],
+          label: {
+            show: false
+          },
           data: [
-            'Entradas',
-            'Despesas',
-            'Saldo',
+            { value: totalEntradas, name: 'Entradas' },
+            { value: totalDespesas, name: 'Despesas' },
+            { value: saldo, name: 'Saldo' },
           ],
-        },
-        series: [
-          {
-            name: 'Grafico Financeiro',
-            type: 'pie',
-            radius: '55%',
-            center: ['50%', '60%'],
-            label: {
-              show: false
-            },
-            data: [
-              { value: totalEntradas, name: 'Entradas' },
-              { value: totalDespesas, name: 'Despesas' },
-              { value: saldo, name: 'Saldo' },
-            ],
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)',
-              },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)',
             },
           },
-        ],
+        },
+      ],
     }
   });
 }getReqCharts()
 
 Vue.createApp({
-    data() {
-        return {
-            totalEntradas,
-            totalDespesas,
-            saldo,
-            entradas,
-            optionPie,
-            optionVelox,
-            despesasPagas,
-            despesasAbertas,
-            formatNumber
-        }
+  data() {
+    return {
+      totalEntradas,
+      totalDespesas,
+      saldo,
+      entradas,
+      optionPie,
+      optionVelox,
+      despesasPagas,
+      despesasAbertas,
+      formatNumber
     }
+  }
 })
 .component('v-chart', VueECharts)
 .mount('#app')
