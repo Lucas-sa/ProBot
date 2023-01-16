@@ -53,10 +53,10 @@ optionVelo = {
         lineStyle: {
           width: 6,
           color: [
-            [0.25, '#FF6E76'],
-            [0.5, '#FDDD60'],
-            [0.75, '#58D9F9'],
-            [1, '#7CFFB2']
+            [0.25, '#7CFFB2'],
+            [0.5, '#58D9F9'],
+            [0.75, '#FDDD60'],
+            [1, '#FF6E76']
           ]
         }
       },
@@ -125,6 +125,7 @@ optionVelo = {
 };
 
 optionPie = {
+    color: ["#80FFA5", "#e5323e", "#006699"],
     textStyle: {
       fontFamily: 'Inter, "Helvetica Neue", Arial, sans-serif',
     },
@@ -142,8 +143,6 @@ optionPie = {
       data: [
         'Entradas',
         'Despesas',
-        'Em Aberto',
-        'Pagas',
         'Saldo',
       ],
     },
@@ -152,12 +151,13 @@ optionPie = {
         name: 'Grafico Financeiro',
         type: 'pie',
         radius: '55%',
-        center: ['50%', '50%'],
+        center: ['50%', '60%'],
+        label: {
+          show: false
+        },
         data: [
           { value: totalEntradas, name: 'Entradas' },
           { value: totalDespesas, name: 'Despesas' },
-          { value: despesasAbertas, name: 'Em Abertos' },
-          { value: despesasPagas, name: 'Pagas' },
           { value: saldo, name: 'Saldo' },
         ],
         emphasis: {
